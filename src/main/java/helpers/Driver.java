@@ -50,7 +50,7 @@ public class Driver {
         }
     }
 
-    public static WebDriver currentDriver() {
+    public static synchronized WebDriver currentDriver() {
         return WebDriverRunner.getSelenideDriver().getWebDriver();
     }
 
@@ -72,12 +72,12 @@ public class Driver {
     }
 
     public static void waitForUrlContains(String urlChunk) {
-        WebDriverWait wait = new WebDriverWait(currentDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(currentDriver(), 15);
         wait.until(ExpectedConditions.urlContains(urlChunk));
     }
 
     public static void waitForUrlDoesNotContain(String urlChunk) {
-        int maxTime = 20;
+        int maxTime = 25;
         while(  currentDriver().getCurrentUrl().contains(urlChunk)  && maxTime > 0) {
             wait(1);
             maxTime--;

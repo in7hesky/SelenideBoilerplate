@@ -1,7 +1,9 @@
 package app.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import helpers.Driver;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SearchResultsPage extends BasePage{
@@ -11,7 +13,7 @@ public class SearchResultsPage extends BasePage{
         super(pageUrl);
     }
 
-    public String getRecommendedText(){
+    public String getRecommendedText() {
         return recommendedResult.text();
     }
 

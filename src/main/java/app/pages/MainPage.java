@@ -1,9 +1,12 @@
 package app.pages;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import helpers.Driver;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -11,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage extends BasePage {
 
-    public SelenideElement searchField = $("#ember26");
+    public SelenideElement searchField = $(".full.ember-text-field");
 
     public SelenideElement moreStoriesButton = $("#trending");
     public ElementsCollection storiesVisible = $$(byXpath("//div[@id='cards']//*[@class='bg-card-canvas']"));
@@ -22,15 +25,22 @@ public class MainPage extends BasePage {
 
 
 
-    public boolean canGetMoreStories() {
+    public boolean canGetMoreStories() throws InterruptedException {
         moreStoriesButton.scrollIntoView(false);
         int storiesInitialAmount = storiesVisible.size();
         moreStoriesButton.click();
-        return storiesVisible.size() > storiesInitialAmount;
+        boolean flag = false;
+        try {
+            flag = storiesVisible.size() > storiesInitialAmount;
+        } catch (Exception e) {
+            Thread.sleep(5000);
+        }
+        //storiesVisible.shouldBe(CollectionCondition.sizeGreaterThan(storiesInitialAmount));
+        return flag;
     }
 
     public SearchResultsPage searchFor(String inputText) {
-        searchField.click();
+        searchField.shouldBe(Condition.visible);
         searchField.setValue(inputText).submit();
         return new SearchResultsPage("");
     }
