@@ -1,10 +1,15 @@
 package app;
 
-import app.pages.LoginPage;
+import app.pages.MainPage;
+import app.pages.TopicsPage;
 
 public class PageBuilder {
 
-    public static LoginPage buildLoginPage() {
-        return new LoginPage("/login");
+    public static MainPage buildMainPage() {
+        return new MainPage("/");
+    }
+
+    public static TopicsPage buildTopicsPage() {
+        return new TopicsPage("/topics");
     }
 }

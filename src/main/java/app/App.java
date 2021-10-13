@@ -1,12 +1,15 @@
 package app;
 
-import app.pages.LoginPage;
+import app.pages.MainPage;
+import app.pages.TopicsPage;
 
 public class App {
 
-    public LoginPage loginPage;
+    public MainPage mainPage;
+    public TopicsPage topicsPage;
 
     public App() {
-        loginPage = PageBuilder.buildLoginPage();
+        mainPage = PageBuilder.buildMainPage();
+        topicsPage = PageBuilder.buildTopicsPage();
     }
 }

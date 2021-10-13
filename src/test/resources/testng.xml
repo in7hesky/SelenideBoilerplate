@@ -8,7 +8,7 @@
 
     <test name="Tests">
         <classes>
-            <class name="ExampleTest" />
+            <class name="MainPageTest" />
         </classes>
     </test>
 
