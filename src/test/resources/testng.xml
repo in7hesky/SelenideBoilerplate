@@ -6,7 +6,7 @@
         <listener class-name="A_BaseTestListener"/>
     </listeners>
 
-    <test name="Tests">
+    <test name="Parallel Tests" parallel = "methods">
         <classes>
             <class name="MainPageTest" />
         </classes>
