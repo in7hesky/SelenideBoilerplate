@@ -1,11 +1,10 @@
+
 import com.codeborne.selenide.Configuration;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import io.qameta.allure.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.FileReader;
@@ -19,13 +18,16 @@ public class MainPageTest extends A_BaseTest {
 
     public static final String DROPDOWN_NAME = "NASA Audiences";
 
-//    @Parameters("browser")
-//    @BeforeClass
-//    public void switchBrowser(String browser) {
-//        Configuration.timeout = 60000;
+    //@Parameters("browser")
+    //public void switchBrowser(String browser) {
+
+    @BeforeClass
+    public void switchBrowser() {
+        Configuration.timeout = 60000;
+        Configuration.pageLoadTimeout = 60000;
 //        if (browser.equals("firefox"))
 //            System.setProperty("browser", "firefox");
-//    }
+    }
 
 
     @Test

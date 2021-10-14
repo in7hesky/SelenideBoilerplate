@@ -2,7 +2,6 @@ package helpers;
 
 import app.AppConfig;
 import com.codeborne.selenide.*;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntries;
@@ -37,21 +36,15 @@ public class Driver {
             Configuration.headless = false;
         }
 
-        switch (TestConfig.browser)
-        {
-            case "chrome":
-                Configuration.browser = Browsers.CHROME;
-                break;
-            case "firefox":
-                Configuration.browser = Browsers.FIREFOX;
-                break;
-            default:
-                Configuration.browser = Browsers.CHROME;
-                break;
+        if ("firefox".equals(TestConfig.browser)) {
+            Configuration.browser = Browsers.FIREFOX;
+        } else {
+            Configuration.browser = Browsers.CHROME;
         }
     }
 
-    public static synchronized WebDriver currentDriver() {
+    //flaky
+    public static WebDriver currentDriver() {
         return WebDriverRunner.getWebDriver();
     }
 
@@ -73,12 +66,12 @@ public class Driver {
     }
 
     public static void waitForUrlContains(String urlChunk) {
-        WebDriverWait wait = new WebDriverWait(currentDriver(), 50);
+        WebDriverWait wait = new WebDriverWait(currentDriver(), 10);
         wait.until(ExpectedConditions.urlContains(urlChunk));
     }
 
     public static void waitForUrlDoesNotContain(String urlChunk) {
-        int maxTime = 70;
+        int maxTime = 20;
         while(  currentDriver().getCurrentUrl().contains(urlChunk)  && maxTime > 0) {
             wait(1);
             maxTime--;

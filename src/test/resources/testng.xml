@@ -1,17 +1,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="SelenideAutoTests" verbose="1" parallel="methods">
+<suite name="SelenideAutoTests" verbose="1">
 
     <listeners>
         <listener class-name="A_BaseTestListener"/>
     </listeners>
 
-    <test name="FirefoxTest" parallel = "methods">
-        <parameter name="browser" value="firefox" />
-        <classes>
-            <class name="MainPageTest" />
-        </classes>
-    </test>
+<!--    <test name="FirefoxTest" parallel = "methods">-->
+<!--        <parameter name="browser" value="firefox" />-->
+<!--        <classes>-->
+<!--            <class name="MainPageTest" />-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="ChromeTest" preserve-order="false" >
         <parameter name="browser" value="chrome" />

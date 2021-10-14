@@ -31,12 +31,6 @@ public class MainPage extends BasePage {
         moreStoriesButton.should(exist).scrollIntoView(false).shouldBe(visible);
         int storiesInitialAmount = storiesVisible.size();
         moreStoriesButton.shouldBe(visible).click();
-//        try {
-//            Thread.sleep(7000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        System.out.println(storiesVisible.size() + " " + storiesInitialAmount);
         return storiesVisible.size() > storiesInitialAmount;
 
         //storiesVisible.shouldBe(CollectionCondition.sizeGreaterThan(storiesInitialAmount));

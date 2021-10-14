@@ -2,6 +2,7 @@ package app.pages;
 import app.AppConfig;
 import com.codeborne.selenide.Selenide;
 import helpers.Trim;
+import org.openqa.selenium.TimeoutException;
 
 public abstract class BasePage {
 
@@ -14,6 +15,7 @@ public abstract class BasePage {
     public void open() {
         String url = Trim.rtrim(AppConfig.baseUrl, "/") + "/" + Trim.ltrim(pageUrl, "/");
         Selenide.open(url);
+
 
     }
 }
