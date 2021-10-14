@@ -2,6 +2,7 @@ package helpers;
 
 import app.AppConfig;
 import com.codeborne.selenide.*;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntries;
@@ -51,7 +52,7 @@ public class Driver {
     }
 
     public static synchronized WebDriver currentDriver() {
-        return WebDriverRunner.getSelenideDriver().getWebDriver();
+        return WebDriverRunner.getWebDriver();
     }
 
     public static void open(String url) {
@@ -72,12 +73,12 @@ public class Driver {
     }
 
     public static void waitForUrlContains(String urlChunk) {
-        WebDriverWait wait = new WebDriverWait(currentDriver(), 15);
+        WebDriverWait wait = new WebDriverWait(currentDriver(), 50);
         wait.until(ExpectedConditions.urlContains(urlChunk));
     }
 
     public static void waitForUrlDoesNotContain(String urlChunk) {
-        int maxTime = 25;
+        int maxTime = 70;
         while(  currentDriver().getCurrentUrl().contains(urlChunk)  && maxTime > 0) {
             wait(1);
             maxTime--;

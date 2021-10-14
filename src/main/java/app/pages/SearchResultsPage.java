@@ -11,9 +11,11 @@ public class SearchResultsPage extends BasePage{
 
     public SearchResultsPage(String pageUrl) {
         super(pageUrl);
+        recommendedResult.shouldBe(visible);
     }
 
     public String getRecommendedText() {
+        System.out.println(Driver.currentDriver().getCurrentUrl());
         return recommendedResult.text();
     }
 

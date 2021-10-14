@@ -9,6 +9,8 @@ import helpers.Driver;
 import java.time.Duration;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -25,22 +27,23 @@ public class MainPage extends BasePage {
 
 
 
-    public boolean canGetMoreStories() throws InterruptedException {
-        moreStoriesButton.scrollIntoView(false);
+    public boolean canGetMoreStories() {
+        moreStoriesButton.should(exist).scrollIntoView(false).shouldBe(visible);
         int storiesInitialAmount = storiesVisible.size();
-        moreStoriesButton.click();
-        boolean flag = false;
-        try {
-            flag = storiesVisible.size() > storiesInitialAmount;
-        } catch (Exception e) {
-            Thread.sleep(5000);
-        }
+        moreStoriesButton.shouldBe(visible).click();
+//        try {
+//            Thread.sleep(7000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println(storiesVisible.size() + " " + storiesInitialAmount);
+        return storiesVisible.size() > storiesInitialAmount;
+
         //storiesVisible.shouldBe(CollectionCondition.sizeGreaterThan(storiesInitialAmount));
-        return flag;
     }
 
     public SearchResultsPage searchFor(String inputText) {
-        searchField.shouldBe(Condition.visible);
+        searchField.shouldBe(visible);
         searchField.setValue(inputText).submit();
         return new SearchResultsPage("");
     }

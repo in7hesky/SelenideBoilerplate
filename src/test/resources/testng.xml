@@ -6,14 +6,14 @@
         <listener class-name="A_BaseTestListener"/>
     </listeners>
 
-<!--    <test name="FirefoxTest" parallel = "methods">-->
-<!--        <parameter name="browser" value="firefox" />-->
-<!--        <classes>-->
-<!--            <class name="MainPageTest" />-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="FirefoxTest" parallel = "methods">
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <class name="MainPageTest" />
+        </classes>
+    </test>
 
-    <test name="ChromeTest">
+    <test name="ChromeTest" preserve-order="false" >
         <parameter name="browser" value="chrome" />
         <classes>
             <class name="MainPageTest" />

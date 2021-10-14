@@ -2,8 +2,9 @@ import com.codeborne.selenide.Configuration;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import io.qameta.allure.*;
-import org.testng.Assert;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -18,19 +19,20 @@ public class MainPageTest extends A_BaseTest {
 
     public static final String DROPDOWN_NAME = "NASA Audiences";
 
-    @Parameters("browser")
-    @BeforeClass
-    public void switchBrowser(String browser) {
-        Configuration.timeout = 25000;
-        if (browser.equals("firefox"))
-            System.setProperty("browser", "firefox");
-    }
+//    @Parameters("browser")
+//    @BeforeClass
+//    public void switchBrowser(String browser) {
+//        Configuration.timeout = 60000;
+//        if (browser.equals("firefox"))
+//            System.setProperty("browser", "firefox");
+//    }
+
 
     @Test
     @Feature("login")
     @Description("trying to describe a test")
     @Severity(SeverityLevel.CRITICAL)
-    public void canGetMoreStoriesTest() throws InterruptedException {
+    public void canGetMoreStoriesTest(){
         app.mainPage.open();
         softAssert.assertTrue(app.mainPage.canGetMoreStories());
         softAssert.assertAll();
@@ -39,11 +41,7 @@ public class MainPageTest extends A_BaseTest {
     @Test
     public void canGetValidSearchResultTest() {
         app.mainPage.open();
-        try  {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         String searchOutput = app.mainPage.searchFor(SEARCH_INPUT).getRecommendedText();
         softAssert.assertEquals(searchOutput.toLowerCase(), SEARCH_TARGET.toLowerCase());
         softAssert.assertAll();

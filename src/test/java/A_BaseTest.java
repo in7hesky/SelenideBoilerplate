@@ -1,11 +1,12 @@
 import app.App;
 import helpers.Driver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 class A_BaseTest {
@@ -17,7 +18,7 @@ class A_BaseTest {
     @BeforeClass
     public void setUp() {
 
-        Driver.initDriver();
+        //WebDriverManager..setup();
 
         app = new App();
         softAssert = new SoftAssert();
@@ -26,13 +27,19 @@ class A_BaseTest {
         DOMConfigurator.configure("src/main/resources/log4j.xml");
     }
 
-    @AfterMethod
-    public void clearCookies() {
-        Driver.clearCookies();
-    }
+//    @BeforeTest
+//    public void initiateDriver() {
+//        driver = new ChromeDriver();
+//    }
 
-    @AfterClass
-    public void tearDown() {
-        Driver.close();
-    }
+
+//    @AfterMethod
+//    public void clearCookies() {
+//        Driver.clearCookies();
+//    }
+
+//    @AfterClass
+//    public void tearDown() {
+//        driver.quit();
+//    }
 }

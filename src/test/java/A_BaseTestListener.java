@@ -1,10 +1,6 @@
 import com.codeborne.selenide.Screenshots;
 import com.google.common.io.Files;
-import helpers.Driver;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -22,6 +18,11 @@ public class A_BaseTestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult TestResult) {
+        try {
+            saveScreenshot();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -30,10 +31,11 @@ public class A_BaseTestListener implements ITestListener {
 //        if (driver != null)
 //            takeScreenshot(driver);
         try {
-            takeScreenshot();
+            saveScreenshot();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -56,12 +58,12 @@ public class A_BaseTestListener implements ITestListener {
 
     }
 
+
     @Attachment(value = "Page Screenshot", type = "image/png")
-    public byte[] takeScreenshot() throws IOException, IOException {
+    public byte[] saveScreenshot() throws IOException, IOException {
         File screenshot = Screenshots.takeScreenShotAsFile();
         return Files.toByteArray(screenshot);
     }
-
 //    @Attachment(value = "Page screenshot", type = "image/png")
 //    protected byte[] takeScreenshot(WebDriver driver) {
 //        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
